@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerPrintAccess.Model", "FingerPrintAccess.Models\FingerPrintAccess.Model.csproj", "{4B3D0EEC-F07D-4B73-8A31-4E00332E0796}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerPrintAccess.Data", "FingerPrintAccess.Data\FingerPrintAccess.Data.csproj", "{60C6E487-1193-44C6-AD05-F0A83B4F59E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerPrintAccess.Service", "FingerPrintAccess.Service\FingerPrintAccess.Service.csproj", "{94E56AD1-5B1F-401A-87CD-2F3F4761250A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FingerPrintAccess.Web", "FingerPrintAccess.Web\FingerPrintAccess.Web.csproj", "{0E2FD6F7-9611-47A6-A53C-C1FBBE5AFB9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B3D0EEC-F07D-4B73-8A31-4E00332E0796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B3D0EEC-F07D-4B73-8A31-4E00332E0796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B3D0EEC-F07D-4B73-8A31-4E00332E0796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B3D0EEC-F07D-4B73-8A31-4E00332E0796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C6E487-1193-44C6-AD05-F0A83B4F59E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C6E487-1193-44C6-AD05-F0A83B4F59E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C6E487-1193-44C6-AD05-F0A83B4F59E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C6E487-1193-44C6-AD05-F0A83B4F59E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94E56AD1-5B1F-401A-87CD-2F3F4761250A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E56AD1-5B1F-401A-87CD-2F3F4761250A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E56AD1-5B1F-401A-87CD-2F3F4761250A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E56AD1-5B1F-401A-87CD-2F3F4761250A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E2FD6F7-9611-47A6-A53C-C1FBBE5AFB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E2FD6F7-9611-47A6-A53C-C1FBBE5AFB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E2FD6F7-9611-47A6-A53C-C1FBBE5AFB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E2FD6F7-9611-47A6-A53C-C1FBBE5AFB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

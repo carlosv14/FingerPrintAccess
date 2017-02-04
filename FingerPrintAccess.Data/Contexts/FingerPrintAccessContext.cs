@@ -10,8 +10,14 @@ namespace FingerPrintAccess.Data.Contexts
     public class FingerPrintAccessContext : DbContext
     {
         public FingerPrintAccessContext() 
-            : base("name=FingerPrintAccess")
+            : base("FingerPrintAccess")
         {
         }
+
+        public virtual void Commit()
+        {
+            base.SaveChanges();
+        }
+
     }
 }

@@ -2,16 +2,15 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Policy;
 using FingerPrintAccess.Data.Contexts;
 
-namespace FingerPrintAccess.Data.Repositories
+namespace FingerPrintAccess.Data.Repositories.Base
 {
     public abstract class BaseRepository<TEntity> where TEntity : class 
     {
         public FingerPrintAccessContext Context { get; set; }
 
-        public BaseRepository(FingerPrintAccessContext context)
+        protected BaseRepository(FingerPrintAccessContext context)
         {
             this.Context = context;
         }
@@ -50,7 +49,7 @@ namespace FingerPrintAccess.Data.Repositories
         /// <returns>
         /// An <see cref="IQueryable"/> whose elements are the result of invoking a projection function on each element of source.
         /// </returns>
-        public virtual IQueryable<TResult> Project<TResult>(Expression<Func<TEntity, TResult>> predicate)
+        public virtual IQueryable<TResult> Transform<TResult>(Expression<Func<TEntity, TResult>> predicate)
         {
             return this.All().Select(predicate);
         }
@@ -143,9 +142,9 @@ namespace FingerPrintAccess.Data.Repositories
         /// <summary>
         /// Saves all changes made in this context to the underlying database.
         /// </summary>
-        public virtual void SaveChanges()
+        public virtual int SaveChanges()
         {
-            this.Context.SaveChanges();
+            return this.Context.SaveChanges();
         }
 
         /// <summary>

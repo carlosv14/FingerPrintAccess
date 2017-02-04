@@ -14,10 +14,5 @@ namespace FingerPrintAccess.Data.Contexts
         {
         }
 
-        public virtual void Commit()
-        {
-            base.SaveChanges();
-        }
-
     }
 }

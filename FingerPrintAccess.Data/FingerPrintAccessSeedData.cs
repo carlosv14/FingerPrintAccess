@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FingerPrintAccess.Data.Contexts;
+using FingerPrintAccess.Models.Models;
 
 namespace FingerPrintAccess.Data
 {
@@ -12,7 +13,21 @@ namespace FingerPrintAccess.Data
     {
         protected override void Seed(FingerPrintAccessContext context)
         {
-            base.Seed(context);
+            GetUsers().ForEach(u => context.Users.Add(u));
+            context.SaveChanges();
+        }
+
+        private static List<User> GetUsers()
+        {
+            return new List<User>
+            {
+                new User
+                {
+                    Name = "admin",
+                    Password = "admin",
+                    Username = "admin"
+                }
+            };
         }
     }
 }

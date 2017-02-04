@@ -6,11 +6,11 @@ using FingerPrintAccess.Data.Contexts;
 
 namespace FingerPrintAccess.Data.Repositories.Base
 {
-    public abstract class BaseRepository<TEntity> where TEntity : class 
+    public abstract class AbstractBaseRepository<TEntity> where TEntity : class 
     {
         public FingerPrintAccessContext Context { get; set; }
 
-        protected BaseRepository(FingerPrintAccessContext context)
+        protected AbstractBaseRepository(FingerPrintAccessContext context)
         {
             this.Context = context;
         }

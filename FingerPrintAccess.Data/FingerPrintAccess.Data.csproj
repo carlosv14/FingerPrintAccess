@@ -49,12 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\UserConfiguration.cs" />
     <Compile Include="Contexts\FingerPrintAccessContext.cs" />
     <Compile Include="FingerPrintAccessSeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Base\BaseRepository.cs" />
+    <Compile Include="Repositories\Base\AbstractBaseRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FingerPrintAccess.Models\FingerPrintAccess.Model.csproj">
+      <Project>{4b3d0eec-f07d-4b73-8a31-4e00332e0796}</Project>
+      <Name>FingerPrintAccess.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

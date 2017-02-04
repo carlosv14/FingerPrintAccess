@@ -12,5 +12,11 @@ namespace FingerPrintAccess.Models.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
+
+        public User()
+        {
+            CreationDate = DateTime.Now;
+        }
     }
 }

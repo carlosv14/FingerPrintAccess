@@ -13,7 +13,7 @@ namespace FingerPrintAccess.Data.Contexts
     {
         static FingerPrintAccessContext()
         {
-             Database.SetInitializer<FingerPrintAccessContext>(new CreateDatabaseIfNotExists<FingerPrintAccessContext>());
+             Database.SetInitializer(new CreateDatabaseIfNotExists<FingerPrintAccessContext>());
         }
         public FingerPrintAccessContext() 
             : base("FingerPrintAccess")
@@ -21,6 +21,9 @@ namespace FingerPrintAccess.Data.Contexts
         }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Record> Records { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserConfiguration());

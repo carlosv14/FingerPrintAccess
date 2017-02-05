@@ -8,8 +8,12 @@ namespace FingerPrintAccess.Models.Models
 {
     public class Role
     {
+        public Role()
+        {
+            this.Users = new HashSet<User>();
+        }
         public long Id { get; set; }
         public string Name { get; set; }
-        public ICollection<User> Users { get; set; } = new HashSet<User>();
+        public ICollection<User> Users { get; set; } 
     }
 }

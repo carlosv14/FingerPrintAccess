@@ -41,6 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FingerPrintAccess.Data\FingerPrintAccess.Data.csproj">
+      <Project>{60c6e487-1193-44c6-ad05-f0a83b4f59e7}</Project>
+      <Name>FingerPrintAccess.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FingerPrintAccess.Models\FingerPrintAccess.Model.csproj">
+      <Project>{4b3d0eec-f07d-4b73-8a31-4e00332e0796}</Project>
+      <Name>FingerPrintAccess.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

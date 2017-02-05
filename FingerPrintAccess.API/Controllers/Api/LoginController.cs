@@ -5,18 +5,20 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using FingerPrintAccess.API.Models;
 using FingerPrintAccess.Service;
 
 namespace FingerPrintAccess.API.Controllers.Api
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
-        private UserService userService;
+        private readonly UserService _userService;
 
         public LoginController(UserService userService)
         {
-            this.userService = userService;
+            this._userService = userService;
         }
         [HttpPost]
         public IHttpActionResult Login(UserLoginModel userLogin)
@@ -26,7 +28,7 @@ namespace FingerPrintAccess.API.Controllers.Api
                 return this.BadRequest(this.ModelState);
             }
             
-            var user = this.userService.GetUser(userLogin.User, userLogin.Password);
+            var user = this._userService.GetUser(userLogin.User, userLogin.Password);
             if (user != null)
             {
                 var userInformation = $"{user.Username}:{user.Password}";

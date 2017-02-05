@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using FingerPrintAccess.Data.Contexts;
 
 namespace FingerPrintAccess.Data.Repositories.Base
@@ -145,6 +146,14 @@ namespace FingerPrintAccess.Data.Repositories.Base
         public virtual int SaveChanges()
         {
             return this.Context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Saves all changes made in this context to the underlying database.
+        /// </summary>
+        public virtual Task<int> SaveChangesAsync()
+        {
+            return this.Context.SaveChangesAsync();
         }
 
         /// <summary>

@@ -8,12 +8,16 @@ using FingerPrintAccess.Models.Models;
 
 namespace FingerPrintAccess.Service
 {
-    interface IUserService
+    public interface IUserService
     {
         IEnumerable<User> GetUsers();
         User GetUser(long id);
         User CreateUser(User user);
-        int SaveUser();
+        User UpdateUser(long id,User user);
+        User RemoveUser(long id);
+        int SaveChanges();
+        Task<int> SaveChangesAsync();
+        bool UserExists(long id);
     }
     public class UserService : IUserService
     {
@@ -26,22 +30,42 @@ namespace FingerPrintAccess.Service
 
         public IEnumerable<User> GetUsers()
         {
-            return _userRepository.All();
+            return this._userRepository.All();
         }
 
         public User GetUser(long id)
         {
-            return _userRepository.FirstOrDefault(u => u.Id == id);
+            return this._userRepository.FirstOrDefault(u => u.Id == id);
         }
 
         public User CreateUser(User user)
         {
-            return _userRepository.Create(user);
+            return this._userRepository.Create(user);
         }
 
-        public int SaveUser()
+        public User UpdateUser(long id, User user)
         {
-            return _userRepository.SaveChanges();
+            return this._userRepository.Update(new User {Id = id },user);
+        }
+
+        public User RemoveUser(long id)
+        {
+            return this._userRepository.Delete(new User {Id = id});
+        }
+
+        public int SaveChanges()
+        {
+            return this._userRepository.SaveChanges();
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+            return this._userRepository.SaveChangesAsync();
+        }
+
+        public bool UserExists(long id)
+        {
+            return this._userRepository.All().Any(u => u.Id == id);
         }
     }
 }

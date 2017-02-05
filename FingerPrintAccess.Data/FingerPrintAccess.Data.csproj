@@ -65,11 +65,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\RolesConfiguration.cs" />
     <Compile Include="Configuration\UserConfiguration.cs" />
     <Compile Include="Contexts\FingerPrintAccessContext.cs" />
     <Compile Include="Migrations\201702042341314_Initial.cs" />
     <Compile Include="Migrations\201702042341314_Initial.Designer.cs">
       <DependentUpon>201702042341314_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702050418383_AddedRoles.cs" />
+    <Compile Include="Migrations\201702050418383_AddedRoles.Designer.cs">
+      <DependentUpon>201702050418383_AddedRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +94,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702042341314_Initial.resx">
       <DependentUpon>201702042341314_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702050418383_AddedRoles.resx">
+      <DependentUpon>201702050418383_AddedRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

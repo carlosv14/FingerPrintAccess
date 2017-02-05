@@ -13,6 +13,7 @@ namespace FingerPrintAccess.Models.Models
         public string Password { get; set; }
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
+        public ICollection<Role> Roles { get; set; } = new HashSet<Role>();
 
         public User()
         {

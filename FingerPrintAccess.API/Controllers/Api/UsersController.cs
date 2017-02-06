@@ -41,6 +41,7 @@ namespace FingerPrintAccess.API.Controllers.Api
             return this._userService.GetUser(id);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST api/<controller>
         public async Task<IHttpActionResult> Post(UserFormViewModel user)
         {

@@ -24,10 +24,10 @@ namespace FingerPrintAccess.API.Security
         {
             try
             {
-                var tokens = request.Headers.Authorization.Parameter;
-                var context = new FingerPrintAccessContext();
+                var tokens = request.Headers?.Authorization?.Parameter;
                 if (tokens != null)
                 {
+                    var context = new FingerPrintAccessContext();
                     byte[] data = Convert.FromBase64String(tokens);
                     string decodedString = Encoding.UTF8.GetString(data);
                     string[] tokensValues = decodedString.Split(':');
@@ -49,13 +49,6 @@ namespace FingerPrintAccess.API.Security
                         taskCompletionSource.SetResult(response);
                         return taskCompletionSource.Task;
                     }
-                }
-                else
-                {
-                    var response = new HttpResponseMessage(HttpStatusCode.Forbidden);
-                    var taskCompletionSource = new TaskCompletionSource<HttpResponseMessage>();
-                    taskCompletionSource.SetResult(response);
-                    return taskCompletionSource.Task;
                 }
                 return base.SendAsync(request, cancellationToken);
             }

@@ -7,14 +7,17 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Security;
 using AutoMapper;
 using FingerPrintAccess.API.Models;
+using FingerPrintAccess.API.Security;
 using FingerPrintAccess.Models.Models;
 using FingerPrintAccess.Service;
 
 namespace FingerPrintAccess.API.Controllers.Api
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [Authorize]
     public class UsersController : ApiController
     {
         private readonly IUserService _userService;
@@ -31,12 +34,14 @@ namespace FingerPrintAccess.API.Controllers.Api
 
         [HttpGet]
         [Route("api/Users/{id}")]
+        [Authorize(Roles = "Admin")]
         // GET api/<controller>/5
         public User Get(long id)
         {
             return this._userService.GetUser(id);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST api/<controller>
         public async Task<IHttpActionResult> Post(UserFormViewModel user)
         {
@@ -66,6 +71,7 @@ namespace FingerPrintAccess.API.Controllers.Api
         // PUT api/<controller>/5
         [HttpPut]
         [Route("api/Users/{userId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> Put(long userId, UserFormViewModel user)
         {
             if (!this.ModelState.IsValid)
@@ -102,6 +108,7 @@ namespace FingerPrintAccess.API.Controllers.Api
         [HttpDelete]
         [Route("api/Users/{id}")]
         // DELETE api/<controller>/5
+        [Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> Delete(long id)
         {
             _userService.RemoveUser(id);

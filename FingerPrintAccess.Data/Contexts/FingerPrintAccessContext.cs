@@ -24,9 +24,11 @@ namespace FingerPrintAccess.Data.Contexts
 
         public DbSet<Record> Records { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserConfiguration());
+            modelBuilder.Configurations.Add(new RolesConfiguration());
         }
     }
 }

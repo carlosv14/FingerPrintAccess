@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace FingerPrintAccess.Service
         int SaveChanges();
         Task<int> SaveChangesAsync();
         bool UserExists(long id);
+        User GetUser(string user, string password);
     }
     public class UserService : IUserService
     {
@@ -66,6 +68,11 @@ namespace FingerPrintAccess.Service
         public bool UserExists(long id)
         {
             return this._userRepository.All().Any(u => u.Id == id);
+        }
+
+        public User GetUser(string user, string password)
+        {
+            return this._userRepository.All().FirstOrDefault(u => u.Username == user && u.Password == password);
         }
     }
 }

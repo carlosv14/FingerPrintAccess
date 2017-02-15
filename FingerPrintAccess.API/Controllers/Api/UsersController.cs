@@ -4,7 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Security;
@@ -26,6 +28,23 @@ namespace FingerPrintAccess.API.Controllers.Api
         {
             this._userService = userService;
         }
+
+        [HttpGet]
+        [Route("api/Users/Me")]
+        public User Me()
+        {
+            try
+            {
+                var id = Convert.ToInt64((HttpContext.Current.User.Identity as ClaimsIdentity)?.FindFirst("Id").Value);
+                return _userService.GetUser(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
         // GET api/<controller>
         public IQueryable<User> Get()
         {

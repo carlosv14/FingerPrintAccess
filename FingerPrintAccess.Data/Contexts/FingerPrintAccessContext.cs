@@ -22,10 +22,12 @@ namespace FingerPrintAccess.Data.Contexts
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new RolesConfiguration());
+            modelBuilder.Configurations.Add(new RoomsConfiguration());
         }
     }
 }

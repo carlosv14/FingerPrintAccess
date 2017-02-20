@@ -27,6 +27,9 @@ namespace FingerPrintAccess.Data.Repositories
             oldEntity.Name = newEntity.Name;
             oldEntity.Password = newEntity.Password;
             oldEntity.Username = newEntity.Username;
+            oldEntity.CreationDate = newEntity.CreationDate;
+            oldEntity.Roles = newEntity.Roles;
+            oldEntity.Rooms = newEntity.Rooms;
             return oldEntity;
         }
     }

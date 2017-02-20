@@ -13,6 +13,7 @@ using FingerPrintAccess.API.Models;
 using FingerPrintAccess.API.Security;
 using FingerPrintAccess.Models.Models;
 using FingerPrintAccess.Service;
+using FingerPrintAccess.Service.Interfaces;
 
 namespace FingerPrintAccess.API.Controllers.Api
 {
@@ -29,7 +30,7 @@ namespace FingerPrintAccess.API.Controllers.Api
         // GET api/<controller>
         public IQueryable<User> Get()
         {
-            return this._userService.GetUsers().AsQueryable();
+            return this._userService.GetAll().AsQueryable();
         }
 
         [HttpGet]
@@ -38,7 +39,7 @@ namespace FingerPrintAccess.API.Controllers.Api
         // GET api/<controller>/5
         public User Get(long id)
         {
-            return this._userService.GetUser(id);
+            return this._userService.Get(id);
         }
 
         [Authorize(Roles = "Admin")]
@@ -53,7 +54,7 @@ namespace FingerPrintAccess.API.Controllers.Api
             if (user != null)
             {
                 var newUser = Mapper.Map<UserFormViewModel, User>(user);
-                this._userService.CreateUser(newUser);
+                this._userService.Create(newUser);
             }
 
             try
@@ -85,7 +86,7 @@ namespace FingerPrintAccess.API.Controllers.Api
             }
             
             var userToUpdate = Mapper.Map<UserFormViewModel, User>(user);
-            _userService.UpdateUser(userId, userToUpdate);
+            _userService.Update(userId, userToUpdate);
      
             try
             {
@@ -111,7 +112,7 @@ namespace FingerPrintAccess.API.Controllers.Api
         [Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> Delete(long id)
         {
-            _userService.RemoveUser(id);
+            _userService.Remove(id);
             try
             {
                 await _userService.SaveChangesAsync();

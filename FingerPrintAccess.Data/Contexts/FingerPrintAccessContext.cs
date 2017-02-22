@@ -13,7 +13,7 @@ namespace FingerPrintAccess.Data.Contexts
     {
         static FingerPrintAccessContext()
         {
-             Database.SetInitializer<FingerPrintAccessContext>(new CreateDatabaseIfNotExists<FingerPrintAccessContext>());
+             Database.SetInitializer<FingerPrintAccessContext>(new DropCreateDatabaseIfModelChanges<FingerPrintAccessContext>());
         }
         public FingerPrintAccessContext() 
             : base("FingerPrintAccess")

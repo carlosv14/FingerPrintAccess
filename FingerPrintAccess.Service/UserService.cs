@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using FingerPrintAccess.Data.Contexts;
 using FingerPrintAccess.Data.Repositories.Base;
 using FingerPrintAccess.Models.Models;
 using FingerPrintAccess.Service.Interfaces;
@@ -18,12 +20,12 @@ namespace FingerPrintAccess.Service
 
         public IEnumerable<User> GetAll()
         {
-            return this._userRepository.All();
+            return this._userRepository.All().Include(u => u.Rooms);
         }
 
         public User Get(long id)
         {
-            return this._userRepository.FirstOrDefault(u => u.Id == id);
+            return this._userRepository.All().Include(u => u.Rooms).FirstOrDefault(u => u.Id == id);
         }
 
         public User Create(User entity)
@@ -59,6 +61,13 @@ namespace FingerPrintAccess.Service
         public User Get(string user, string password)
         {
             return this._userRepository.All().FirstOrDefault(u => u.Username == user && u.Password == password);
+        }
+
+        public void AddRoom(long userId, Room room)
+        {
+            var user = this.Get(userId);
+            user.Rooms.Add(room);
+            this._userRepository.Update(user);
         }
     }
 }

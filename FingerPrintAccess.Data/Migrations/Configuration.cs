@@ -34,7 +34,8 @@ namespace FingerPrintAccess.Data.Migrations
                 Name = "admin",
                 Password = "admin",
                 Username = "admin",
-                Roles = new List<Role>() {new Role {Name = "Admin"} }
+                Roles = new List<Role>() {new Role {Name = "Admin"} },
+                Rooms = new List<Room>() {new Room {Name = "Principal room"} }
             });
 
         }

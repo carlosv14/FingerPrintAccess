@@ -37,7 +37,7 @@ namespace FingerPrintAccess.API.Controllers.Api
             try
             {
                 var id = Convert.ToInt64((HttpContext.Current.User.Identity as ClaimsIdentity)?.FindFirst("Id").Value);
-                return _userService.GetUser(id);
+                return _userService.Get(id);
             }
             catch (Exception)
             {
@@ -150,5 +150,73 @@ namespace FingerPrintAccess.API.Controllers.Api
             return this.Ok();
         }
 
+        [HttpPost]
+        [Route("api/Users/AddRoom/{userId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> AddRoom(long userId, RoomFormViewModel room)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            if (room != null)
+            {
+                var newRoom = Mapper.Map<RoomFormViewModel, Room>(room);
+                this._userService.AddRoom(userId,newRoom);
+            }
+
+            try
+            {
+                await this._userService.SaveChangesAsync();
+            }
+            catch (DataException)
+            {
+                if (!this._userService.UserExists(userId))
+                {
+                    return this.NotFound();
+                }
+                else
+                {
+                     throw;
+                }
+            }
+            return this.Ok();
+        }
+
+        [HttpPost]
+        [Route("api/Users/AddRoom")]
+        public async Task<IHttpActionResult> AddRoom(RoomFormViewModel room)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            var id = Convert.ToInt64((HttpContext.Current.User.Identity as ClaimsIdentity)?.FindFirst("Id").Value);
+
+            if (room != null)
+            {
+                var newRoom = Mapper.Map<RoomFormViewModel, Room>(room);
+                this._userService.AddRoom(id, newRoom);
+            }
+
+            try
+            {
+                await this._userService.SaveChangesAsync();
+            }
+            catch (DataException)
+            {
+                if (!this._userService.UserExists(id))
+                {
+                    return this.NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return this.Ok();
+        }
     }
 }

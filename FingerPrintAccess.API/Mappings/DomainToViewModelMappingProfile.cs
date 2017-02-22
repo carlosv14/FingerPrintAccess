@@ -15,6 +15,7 @@ namespace FingerPrintAccess.API.Mappings
         public DomainToViewModelMappingProfile()
         {
             CreateMap<User, UserFormViewModel>();
+            CreateMap<Room, RoomFormViewModel>();
         }
     }
 }

@@ -50,6 +50,11 @@ namespace FingerPrintAccess.Service
         {
            return this._roomRepository.SaveChangesAsync();
         }
+
+        public bool RoomExists(long id)
+        {
+            return this._roomRepository.All().Any(r => r.Id == id);
+        }
     }
 
 }

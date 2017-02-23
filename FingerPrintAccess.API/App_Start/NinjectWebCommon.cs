@@ -1,4 +1,5 @@
 using System.Web.Http;
+using FingerPrintAccess.Data.Contexts;
 using FingerPrintAccess.Data.Repositories;
 using FingerPrintAccess.Data.Repositories.Base;
 using FingerPrintAccess.Models.Models;
@@ -69,8 +70,11 @@ namespace FingerPrintAccess.API.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<FingerPrintAccessContext>().ToSelf().InRequestScope();
             kernel.Bind<AbstractBaseRepository<User>>().To<UserRepository>().InRequestScope();
             kernel.Bind<IUserService>().To<UserService>().InRequestScope();
+
+            kernel.Bind<Record>().ToSelf();
         }        
     }
 }

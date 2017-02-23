@@ -18,7 +18,7 @@ namespace FingerPrintAccess.Data.Repositories
 
         public override IQueryable<Record> All()
         {
-            this.Context.re
+            return this.Context.Records;
         }
 
         protected override Record MapNewValuesToOld(Record oldEntity, Record newEntity)

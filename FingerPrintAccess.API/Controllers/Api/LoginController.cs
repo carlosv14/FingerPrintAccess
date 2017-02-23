@@ -20,6 +20,7 @@ namespace FingerPrintAccess.API.Controllers.Api
         {
             this._userService = userService;
         }
+
         [HttpPost]
         public IHttpActionResult Login(UserLoginModel userLogin)
         {
@@ -36,6 +37,16 @@ namespace FingerPrintAccess.API.Controllers.Api
                 return Ok(new {Token = $"Basic {System.Convert.ToBase64String(plainTextBytes)}"});
             }
             return this.NotFound();
+        }
+
+        public IHttpActionResult AuthenticateFingerprint(int? EnrollId)
+        {
+            if (EnrollId == null)
+            {
+                return this.BadRequest();
+            }
+
+
         }
     }
 }

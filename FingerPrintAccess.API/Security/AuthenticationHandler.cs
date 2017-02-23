@@ -55,7 +55,7 @@ namespace FingerPrintAccess.API.Security
                 }
                 return base.SendAsync(request, cancellationToken);
             }
-            catch
+            catch(Exception ex)
             {
                 var response = new HttpResponseMessage(HttpStatusCode.Forbidden);
                 var taskCompletionSource = new TaskCompletionSource<HttpResponseMessage>();

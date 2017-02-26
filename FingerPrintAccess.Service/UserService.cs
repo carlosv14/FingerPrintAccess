@@ -60,7 +60,7 @@ namespace FingerPrintAccess.Service
 
         public User Get(string user, string password)
         {
-            return this._userRepository.All().FirstOrDefault(u => u.Username == user && u.Password == password);
+            return this._userRepository.All().Include(u => u.Roles).FirstOrDefault(u => u.Username == user && u.Password == password);
         }
 
         public void AddRoom(long userId, Room room)

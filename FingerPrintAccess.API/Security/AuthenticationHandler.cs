@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
@@ -37,7 +38,9 @@ namespace FingerPrintAccess.API.Security
                         context.Users.Include(u => u.Roles).FirstOrDefault(u => u.Username ==  username && u.Password == password);
                     if (user != null)
                     {
-                        IPrincipal principal = new GenericPrincipal(new GenericIdentity(user.Name), user.Roles.Select(r => r.Name).ToArray());
+                        GenericIdentity identity = new GenericIdentity(user.Name);
+                        identity.AddClaim(new Claim("Id",user.Id.ToString()));
+                        IPrincipal principal = new GenericPrincipal(identity, user.Roles.Select(r => r.Name).ToArray());
                         Thread.CurrentPrincipal = principal;
                         HttpContext.Current.User = principal;
                     }
@@ -52,7 +55,7 @@ namespace FingerPrintAccess.API.Security
                 }
                 return base.SendAsync(request, cancellationToken);
             }
-            catch
+            catch(Exception ex)
             {
                 var response = new HttpResponseMessage(HttpStatusCode.Forbidden);
                 var taskCompletionSource = new TaskCompletionSource<HttpResponseMessage>();

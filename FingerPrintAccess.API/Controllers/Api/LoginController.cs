@@ -28,12 +28,12 @@ namespace FingerPrintAccess.API.Controllers.Api
                 return this.BadRequest(this.ModelState);
             }
             
-            var user = this._userService.GetUser(userLogin.User, userLogin.Password);
+            var user = this._userService.Get(userLogin.User, userLogin.Password);
             if (user != null)
             {
                 var userInformation = $"{user.Username}:{user.Password}";
                 var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(userInformation);
-                return Ok(new {Token = $"Basic {System.Convert.ToBase64String(plainTextBytes)}"});
+                return Ok(new {Token = $"Basic {System.Convert.ToBase64String(plainTextBytes)}", Role = user.Roles.FirstOrDefault()?.Name });
             }
             return this.NotFound();
         }

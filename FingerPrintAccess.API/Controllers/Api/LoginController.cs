@@ -38,15 +38,5 @@ namespace FingerPrintAccess.API.Controllers.Api
             }
             return this.NotFound();
         }
-
-        public IHttpActionResult AuthenticateFingerprint(int? EnrollId)
-        {
-            if (EnrollId == null)
-            {
-                return this.BadRequest();
-            }
-
-
-        }
     }
 }

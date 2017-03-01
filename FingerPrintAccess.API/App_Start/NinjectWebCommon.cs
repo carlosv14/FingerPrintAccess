@@ -18,6 +18,7 @@ namespace FingerPrintAccess.API.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Service.Record;
 
     public static class NinjectWebCommon 
     {
@@ -73,6 +74,8 @@ namespace FingerPrintAccess.API.App_Start
             kernel.Bind<FingerPrintAccessContext>().ToSelf().InRequestScope();
             kernel.Bind<AbstractBaseRepository<User>>().To<UserRepository>().InRequestScope();
             kernel.Bind<IUserService>().To<UserService>().InRequestScope();
+            kernel.Bind<AbstractBaseRepository<Record>>().To<RecordRepository>().InRequestScope();
+            kernel.Bind<IRecordFactory>().To<RecordFactory>().InRequestScope();
 
             kernel.Bind<Record>().ToSelf();
         }        

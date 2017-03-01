@@ -4,6 +4,7 @@ using FingerPrintAccess.Data.Repositories;
 using FingerPrintAccess.Data.Repositories.Base;
 using FingerPrintAccess.Models.Models;
 using FingerPrintAccess.Service;
+using FingerPrintAccess.Service.Interfaces;
 using Ninject.Web.WebApi;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(FingerPrintAccess.API.App_Start.NinjectWebCommon), "Start")]
@@ -73,11 +74,14 @@ namespace FingerPrintAccess.API.App_Start
         {
             kernel.Bind<FingerPrintAccessContext>().ToSelf().InRequestScope();
             kernel.Bind<AbstractBaseRepository<User>>().To<UserRepository>().InRequestScope();
+            kernel.Bind<AbstractBaseRepository<Room>>().To<RoomRepository>().InRequestScope();
+
             kernel.Bind<IUserService>().To<UserService>().InRequestScope();
             kernel.Bind<AbstractBaseRepository<Record>>().To<RecordRepository>().InRequestScope();
             kernel.Bind<IRecordFactory>().To<RecordFactory>().InRequestScope();
 
             kernel.Bind<Record>().ToSelf();
+            kernel.Bind<IRoomService>().To<RoomService>().InRequestScope();
         }        
     }
 }

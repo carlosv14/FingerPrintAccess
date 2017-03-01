@@ -195,6 +195,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\Api\LoginController.cs" />
+    <Compile Include="Models\RoomFormViewModel.cs" />
+    <Compile Include="Controllers\Api\RoomsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

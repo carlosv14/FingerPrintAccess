@@ -29,7 +29,7 @@ namespace FingerPrintAccess.API.Controllers.Api
                 return this.BadRequest(this.ModelState);
             }
             
-            var user = this._userService.GetUser(userLogin.User, userLogin.Password);
+            var user = this._userService.Get(userLogin.User, userLogin.Password);
             if (user != null)
             {
                 var userInformation = $"{user.Username}:{user.Password}";

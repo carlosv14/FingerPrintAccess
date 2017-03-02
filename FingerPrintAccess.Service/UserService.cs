@@ -69,7 +69,10 @@ namespace FingerPrintAccess.Service
             this._userRepository.Context.Rooms.Attach(room);
             var user = new User { Id = userId };
             this._userRepository.Context.Users.Attach(user);
-            user?.Rooms.Add(room);
+            if(user != null)
+            {
+                user.Rooms.Add(room);   
+            }
         }
     }
 }

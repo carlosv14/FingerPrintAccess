@@ -66,6 +66,8 @@ namespace FingerPrintAccess.API.Controllers.Api
         }
 
         [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("api/Users")]
         // POST api/<controller>
         public async Task<IHttpActionResult> Post(UserFormViewModel user)
         {

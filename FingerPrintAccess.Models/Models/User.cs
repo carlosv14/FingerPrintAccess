@@ -19,7 +19,7 @@ namespace FingerPrintAccess.Models.Models
         public User()
         {
             this.Roles = new HashSet<Role>();
-            this.Rooms = = new HashSet<Room>();
+            this.Rooms = new HashSet<Room>();
             CreationDate = DateTime.Now;
         }
     }

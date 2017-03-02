@@ -24,10 +24,12 @@ namespace FingerPrintAccess.API.Controllers.Api
     public class UsersController : ApiController
     {
         private readonly IUserService _userService;
+        private readonly IRoomService _roomService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IRoomService roomService)
         {
             this._userService = userService;
+            this._roomService = roomService;
         }
 
         [HttpGet]
@@ -45,6 +47,8 @@ namespace FingerPrintAccess.API.Controllers.Api
             }
         }
 
+        [HttpGet]
+        [Route("api/Users")]
         [Authorize(Roles = "Admin")]
         // GET api/<controller>
         public IQueryable<User> Get()
@@ -151,23 +155,18 @@ namespace FingerPrintAccess.API.Controllers.Api
         }
 
         [HttpPost]
-        [Route("api/Users/AddRoom/{userId}")]
+        [Route("api/Users/AddRoom")]
         [Authorize(Roles = "Admin")]
-        public async Task<IHttpActionResult> AddRoom(long userId, RoomFormViewModel room)
+        public async Task<IHttpActionResult> AddRoom(long userId, long roomId)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            if (room != null)
-            {
-                var newRoom = Mapper.Map<RoomFormViewModel, Room>(room);
-                this._userService.AddRoom(userId,newRoom);
-            }
-
             try
             {
+                this._userService.AddRoom(userId, roomId);
                 await this._userService.SaveChangesAsync();
             }
             catch (DataException)
@@ -186,7 +185,7 @@ namespace FingerPrintAccess.API.Controllers.Api
 
         [HttpPost]
         [Route("api/Users/AddRoom")]
-        public async Task<IHttpActionResult> AddRoom(RoomFormViewModel room)
+        public async Task<IHttpActionResult> AddRoom(long roomId)
         {
             if (!this.ModelState.IsValid)
             {
@@ -195,14 +194,9 @@ namespace FingerPrintAccess.API.Controllers.Api
 
             var id = Convert.ToInt64((HttpContext.Current.User.Identity as ClaimsIdentity)?.FindFirst("Id").Value);
 
-            if (room != null)
-            {
-                var newRoom = Mapper.Map<RoomFormViewModel, Room>(room);
-                this._userService.AddRoom(id, newRoom);
-            }
-
             try
             {
+                this._userService.AddRoom(id, roomId);
                 await this._userService.SaveChangesAsync();
             }
             catch (DataException)

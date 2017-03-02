@@ -25,6 +25,8 @@ namespace FingerPrintAccess.API.Controllers.Api
         }
 
         [Authorize(Roles = "Admin")]
+        [Route("api/Rooms")]
+        [HttpGet]
         public IQueryable<Room> Get()
         {
             return this._roomService.GetAll().AsQueryable();
@@ -97,5 +99,34 @@ namespace FingerPrintAccess.API.Controllers.Api
             }
             return this.Ok();
         }
+
+        [HttpPost]
+        [Route("api/Rooms")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> Post(RoomFormViewModel room)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            if (room != null)
+            {
+                var newRoom = Mapper.Map<RoomFormViewModel,Room>(room);
+                this._roomService.Create(newRoom);
+            }
+
+            try
+            {
+                await this._roomService.SaveChangesAsync();
+            }
+            catch (DataException)
+            {
+                throw;
+            }
+
+            return Ok();
+        }
+
     }
 }

@@ -13,7 +13,7 @@ namespace FingerPrintAccess.Service
     {
         private readonly AbstractBaseRepository<User> _userRepository;
 
-        public UserService(AbstractBaseRepository<User> userRepository )
+        public UserService(AbstractBaseRepository<User> userRepository)
         {
             this._userRepository = userRepository;
         }
@@ -60,14 +60,16 @@ namespace FingerPrintAccess.Service
 
         public User Get(string user, string password)
         {
-            return this._userRepository.All().FirstOrDefault(u => u.Username == user && u.Password == password);
+            return this._userRepository.All().Include(u => u.Roles).FirstOrDefault(u => u.Username == user && u.Password == password);
         }
 
-        public void AddRoom(long userId, Room room)
+        public void AddRoom(long userId, long roomId)
         {
-            var user = this.Get(userId);
-            user.Rooms.Add(room);
-            this._userRepository.Update(user);
+            var room = new Room { Id = roomId };
+            this._userRepository.Context.Rooms.Attach(room);
+            var user = new User { Id = userId };
+            this._userRepository.Context.Users.Attach(user);
+            user?.Rooms.Add(room);
         }
     }
 }

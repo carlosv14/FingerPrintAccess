@@ -218,14 +218,5 @@ namespace FingerPrintAccess.API.Controllers.Api
             }
             return this.Ok();
         }
-        public async Task<IHttpActionResult> AuthenticateFingerprint(int? EnrollId)
-        {
-            if (EnrollId == null)
-            {
-                return this.BadRequest();
-            }
-
-            return this.Json(new { valid = true });
-        }
     }
 }

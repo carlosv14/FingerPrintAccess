@@ -2,10 +2,7 @@
 
 namespace FingerPrintAccess.Service.Record
 {
-    public interface IRecordService
-    {
-        void Save(Models.Models.Record record);
-    }
+    using FingerPrintAccess.Service.Interfaces;
 
     public class RecordService : IRecordService
     {

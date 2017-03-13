@@ -8,6 +8,6 @@ namespace FingerPrintAccess.Service.Interfaces
     {
         bool UserExists(long id);
         User Get(string user, string password);
-        void AddRoom(long userId, Room room);
+        void AddRoom(long userId, long roomId);
     }
 }

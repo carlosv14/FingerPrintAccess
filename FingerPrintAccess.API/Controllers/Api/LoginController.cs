@@ -28,7 +28,7 @@ namespace FingerPrintAccess.API.Controllers.Api
             {
                 var userInformation = $"{user.Username}:{user.Password}";
                 var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(userInformation);
-                return Ok(new {Token = $"Basic {System.Convert.ToBase64String(plainTextBytes)}"});
+                return Ok(new {Token = $"Basic {System.Convert.ToBase64String(plainTextBytes)}", Role = user.Roles.FirstOrDefault()?.Name });
             }
             return this.NotFound();
         }

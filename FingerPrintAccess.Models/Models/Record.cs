@@ -14,7 +14,6 @@ namespace FingerPrintAccess.Models.Models
 
         public virtual User User { get; set; }
 
-        public virtual ICollection<Record> Records { get; set; }
     }
 
     public enum CheckState

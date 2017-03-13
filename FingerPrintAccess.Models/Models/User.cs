@@ -29,5 +29,7 @@ namespace FingerPrintAccess.Models.Models
         public virtual ICollection<Role> Roles { get; set; }
 
         public virtual ICollection<Room> Rooms { get; set; }
+
+        public virtual ICollection<Record> Records { get; set; }
     }
 }

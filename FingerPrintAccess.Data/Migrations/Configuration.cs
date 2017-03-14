@@ -8,11 +8,12 @@ namespace FingerPrintAccess.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<FingerPrintAccess.Data.Contexts.FingerPrintAccessContext>
+    public class Configuration : DbMigrationsConfiguration<FingerPrintAccess.Data.Contexts.FingerPrintAccessContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(FingerPrintAccess.Data.Contexts.FingerPrintAccessContext context)

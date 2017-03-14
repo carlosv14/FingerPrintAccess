@@ -14,7 +14,7 @@ namespace FingerPrintAccess.Data.Contexts
         public FingerPrintAccessContext() 
             : base("FingerPrintAccess")
         {
-            Database.SetInitializer<FingerPrintAccessContext>(new MigrateDatabaseToLatestVersion<FingerPrintAccessContext, Migrations.Configuration>());
+            Database.SetInitializer<FingerPrintAccessContext>(new CreateDatabaseIfNotExists<FingerPrintAccessContext>());
         }
 
         public DbSet<User> Users { get; set; }

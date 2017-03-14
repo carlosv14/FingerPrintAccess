@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FingerPrintAccess.Data.Configuration;
 using FingerPrintAccess.Models.Models;
 using FingerPrintAccess.Data.Initializers;
+using System.Diagnostics;
 
 namespace FingerPrintAccess.Data.Contexts
 {
@@ -14,11 +15,13 @@ namespace FingerPrintAccess.Data.Contexts
     {
         static FingerPrintAccessContext()
         {
-             Database.SetInitializer(new DropCreateInitializerFingerpintAccess());
         }
+
         public FingerPrintAccessContext() 
             : base("FingerPrintAccess")
         {
+            this.Database.Log += s => Debug.WriteLine(s);
+            Database.SetInitializer(new DropCreateInitializerFingerpintAccess());
         }
 
         public DbSet<User> Users { get; set; }
@@ -32,9 +35,15 @@ namespace FingerPrintAccess.Data.Contexts
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new UserConfiguration());
+            modelBuilder.Configurations.Add(new UserConfiguration(modelBuilder));
             modelBuilder.Configurations.Add(new RolesConfiguration());
             modelBuilder.Configurations.Add(new RoomsConfiguration());
+
+            modelBuilder.Entity<User>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<Fingerprint>()
+                .HasOptional(s => s.User) // Mark Address property optional in Student entity
+                .WithRequired(ad => ad.Fingerprint);
         }
     }
 }

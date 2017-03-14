@@ -1,4 +1,7 @@
-﻿namespace FingerPrintAccess.Models.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FingerPrintAccess.Models.Models
 {
     public class Fingerprint
     {

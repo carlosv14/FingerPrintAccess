@@ -12,10 +12,14 @@ namespace FingerPrintAccess.Service
     public class FingerprintAccessService : IFingerprintAccessService
     {
         private readonly AbstractBaseRepository<Fingerprint> fingerprintRepository;
+        private readonly AbstractBaseRepository<User> userRepository;
 
-        public FingerprintAccessService(AbstractBaseRepository<Fingerprint> fingerprintRepository)
+        public FingerprintAccessService(
+            AbstractBaseRepository<Fingerprint> fingerprintRepository,
+            AbstractBaseRepository<User> userRepository)
         {
             this.fingerprintRepository = fingerprintRepository;
+            this.userRepository = userRepository;
         }
 
         public bool Authenticate(long roomId, int fingerprintId)

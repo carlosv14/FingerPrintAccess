@@ -13,26 +13,40 @@ namespace FingerPrintAccess.Data.Initializers
     {
         protected override void Seed(FingerPrintAccessContext context)
         {
-            var user = new User
-            {
-                CreationDate = DateTime.Now,
-                Fingerprint = new Fingerprint
-                {
-                    RegistryIdentification = 1
-                },
-                Name = "Christopher Escalon",
-                Password = "123",
-                Rooms = new Room[]
+            var rooms = new Room[]
                 {
                     new Room
                     {
                         Name = "Room 1"
                     }
-                },
-                Username = "chris"
+                };
+
+            context.Rooms.AddRange(rooms);
+
+            var fingerprint = new Fingerprint
+            {
+                RegistryIdentification = 1
+            };
+
+            context.Fingerprints.Add(fingerprint);
+
+            var user = new User
+            {
+                CreationDate = DateTime.Now,
+                Name = "Christopher Escalon",
+                Password = "123",
+                Username = "chris",
+                Fingerprint = fingerprint
+
             };
 
             context.Users.Add(user);
+
+            foreach (var room in rooms)
+            {
+                user.Rooms.Add(room);
+            }
+
             context.SaveChanges();
         }
     }

@@ -1,4 +1,5 @@
 using System.Web.Http;
+using FingerPrintAccess.Data.Contexts;
 using FingerPrintAccess.Data.Repositories;
 using FingerPrintAccess.Data.Repositories.Base;
 using FingerPrintAccess.Models.Models;
@@ -18,6 +19,7 @@ namespace FingerPrintAccess.API.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Service.Record;
 
     public static class NinjectWebCommon 
     {
@@ -70,11 +72,18 @@ namespace FingerPrintAccess.API.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<FingerPrintAccessContext>().ToSelf().InRequestScope();
             kernel.Bind<AbstractBaseRepository<User>>().To<UserRepository>().InRequestScope();
             kernel.Bind<AbstractBaseRepository<Room>>().To<RoomRepository>().InRequestScope();
+            kernel.Bind<AbstractBaseRepository<Fingerprint>>().To<FingerprintRepository>().InRequestScope();
 
             kernel.Bind<IUserService>().To<UserService>().InRequestScope();
+            kernel.Bind<AbstractBaseRepository<Record>>().To<RecordRepository>().InRequestScope();
+            kernel.Bind<IRecordFactory>().To<RecordFactory>().InRequestScope();
             kernel.Bind<IRoomService>().To<RoomService>().InRequestScope();
+            kernel.Bind<IFingerprintAccessService>().To<FingerprintAccessService>().InRequestScope();
+
+            kernel.Bind<Record>().ToSelf();
         }        
     }
 }

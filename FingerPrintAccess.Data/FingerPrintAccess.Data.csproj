@@ -69,6 +69,7 @@
     <Compile Include="Configuration\RoomsConfiguration.cs" />
     <Compile Include="Configuration\UserConfiguration.cs" />
     <Compile Include="Contexts\FingerPrintAccessContext.cs" />
+    <Compile Include="Initializers\DropCreateInitializerFingerpintAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Base\AbstractBaseRepository.cs" />
     <Compile Include="Repositories\FingerprintRepository.cs" />

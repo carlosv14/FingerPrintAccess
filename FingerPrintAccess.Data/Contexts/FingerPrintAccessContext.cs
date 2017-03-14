@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FingerPrintAccess.Data.Configuration;
 using FingerPrintAccess.Models.Models;
+using FingerPrintAccess.Data.Initializers;
 
 namespace FingerPrintAccess.Data.Contexts
 {
@@ -13,7 +14,7 @@ namespace FingerPrintAccess.Data.Contexts
     {
         static FingerPrintAccessContext()
         {
-             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<FingerPrintAccessContext>());
+             Database.SetInitializer(new DropCreateInitializerFingerpintAccess());
         }
         public FingerPrintAccessContext() 
             : base("FingerPrintAccess")

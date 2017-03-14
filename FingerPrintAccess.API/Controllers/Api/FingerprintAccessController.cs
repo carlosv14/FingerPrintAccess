@@ -36,12 +36,11 @@ namespace FingerPrintAccess.API.Controllers.Api
         /// The <see cref="Task"/>.
         /// </returns>
         [HttpPost]
-        [Route("api/FingerprintAccess/")]
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> Authenticate(FingerprintAccessViewModel fingerprintAccessViewModel)
         {
 
-            if (fingerprintAccessViewModel.RoomId == null || fingerprintAccessViewModel.FingerprintId == null)
+            if (fingerprintAccessViewModel == null)
             {
                 return this.BadRequest("not valid paramenters");
             }
@@ -52,10 +51,10 @@ namespace FingerPrintAccess.API.Controllers.Api
 
             if (valid)
             {
-                 await this.recordFactory.CreateRecord(
-                    this.userRepository.FirstOrDefault(
-                        x => x.Fingerprint.RegistryIdentification == fingerprintAccessViewModel.FingerprintId),
-                    CheckState.In);
+                await this.recordFactory.CreateRecord(
+                   this.userRepository.FirstOrDefault(
+                       x => x.Fingerprint.RegistryIdentification == fingerprintAccessViewModel.FingerprintId),
+                   CheckState.In);
             }
 
             return

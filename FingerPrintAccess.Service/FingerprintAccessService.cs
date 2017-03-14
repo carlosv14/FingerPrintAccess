@@ -20,7 +20,7 @@ namespace FingerPrintAccess.Service
 
         public bool Authenticate(long roomId, int fingerprintId)
         {
-            var room = this.fingerprintRepository.FirstOrDefault(x => x.RegistryIdentification == fingerprintId)?.User.Rooms.FirstOrDefault(x => x.Id == roomId);
+            Room room = this.fingerprintRepository.FirstOrDefault(x => x.RegistryIdentification == fingerprintId)?.User.Rooms.FirstOrDefault(x => x.Id == roomId);
 
             return room != null;
         }

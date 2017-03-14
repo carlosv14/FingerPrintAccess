@@ -2,6 +2,7 @@
 using System.Web.Http.Cors;
 using FingerPrintAccess.API.Models;
 using FingerPrintAccess.Service;
+using System.Linq;
 
 namespace FingerPrintAccess.API.Controllers.Api
 {

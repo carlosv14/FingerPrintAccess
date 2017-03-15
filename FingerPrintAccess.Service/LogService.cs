@@ -25,12 +25,12 @@ namespace FingerPrintAccess.Service
 
         public Log Get(long id)
         {
-            return this.logRepository.All().Include(l => l.User).FirstOrDefault(l => l.Id == id);
+            return this.logRepository.All().FirstOrDefault(l => l.Id == id);
         }
 
         public IEnumerable<Log> GetAll()
         {
-            return this.logRepository.All().Include(l => l.User);
+            return this.logRepository.All();
         }
 
         public Log Remove(long id)

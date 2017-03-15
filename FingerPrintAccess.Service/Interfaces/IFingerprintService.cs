@@ -11,5 +11,6 @@ namespace FingerPrintAccess.Service.Interfaces
     {
         bool FingerprintExists(long id);
         bool IsAllowed(int fingerprintId, int roomId);
+        Fingerprint Create(int fingerprintId, long roomId);
     }
 }

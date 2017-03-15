@@ -11,5 +11,6 @@ namespace FingerPrintAccess.Models.Models
         public long Id { get; set; }
         public int FingerprintId { get; set; }
         public User User { get; set; }
+        public Room Room { get; set; }
     }
 }

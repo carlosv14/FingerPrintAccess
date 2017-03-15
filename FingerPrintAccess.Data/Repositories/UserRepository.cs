@@ -30,6 +30,7 @@ namespace FingerPrintAccess.Data.Repositories
             oldEntity.CreationDate = newEntity.CreationDate;
             oldEntity.Roles = newEntity.Roles;
             oldEntity.Rooms = newEntity.Rooms;
+            oldEntity.Fingerprints = newEntity.Fingerprints;
             return oldEntity;
         }
     }

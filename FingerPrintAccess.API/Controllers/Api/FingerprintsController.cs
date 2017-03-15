@@ -45,12 +45,12 @@ namespace FingerPrintAccess.API.Controllers.Api
             return this._fingerprintService.Get(id);
         }
 
-        [HttpPost]
-        [Route("api/Fingerprints/{fingerprintId}")]
+        [HttpGet]
+        [Route("api/Fingerprints/AddFingerprint")]
         // POST api/<controller>
-        public async Task<IHttpActionResult> Post(int fingerprintId)
+        public async Task<IHttpActionResult> AddFingerprint(int fingerprintId,long roomId)
         {
-            this._fingerprintService.Create(new Fingerprint { FingerprintId = fingerprintId });
+            this._fingerprintService.Create(fingerprintId, roomId);
             try
             {
                 await this._fingerprintService.SaveChangesAsync();
@@ -59,7 +59,7 @@ namespace FingerPrintAccess.API.Controllers.Api
             {
                 throw;
             }
-            return this.Ok();
+            return this.Ok(true);
         }
 
         [HttpDelete]

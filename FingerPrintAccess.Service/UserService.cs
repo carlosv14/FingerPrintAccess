@@ -78,10 +78,15 @@ namespace FingerPrintAccess.Service
 
         public void AddFingerprint(long userId, long fingerprintId)
         {
-            var user = this._userRepository.FirstOrDefault(u => u.Id == userId);
-            var fingerprint = this._userRepository.Context.Fingerprints.Attach(new Fingerprint { Id = fingerprintId });
-            user.Fingerprints.Add(fingerprint);
-            this._userRepository.Update(user);
+            var user = this.Get(userId);
+
+            var fingerprint = new Fingerprint { Id = fingerprintId };
+            this._userRepository.Context.Fingerprints.Attach(fingerprint);
+            if (user != null)
+            {
+                user.Fingerprints.Add(fingerprint);
+            }
+            this._userRepository.Update(new User { Id = userId },user);
         }
     }
 }

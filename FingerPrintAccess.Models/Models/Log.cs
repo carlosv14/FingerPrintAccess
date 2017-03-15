@@ -9,10 +9,10 @@ namespace FingerPrintAccess.Models.Models
     public class Log
     {
         public long Id { get; set; }
-        public User User { get; set; }
+        public string UserName { get; set; }
         public DateTime Date { get; set; }
         public bool Successful { get; set; }
-        public Room Room { get; set; }
+        public string RoomName { get; set; }
 
         public Log()
         {

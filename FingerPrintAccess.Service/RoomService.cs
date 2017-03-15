@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FingerPrintAccess.Data.Repositories.Base;
 using FingerPrintAccess.Models.Models;
 using FingerPrintAccess.Service.Interfaces;
+using System.Data.Entity;
 
 namespace FingerPrintAccess.Service
 {
@@ -18,12 +19,12 @@ namespace FingerPrintAccess.Service
         }
         public IEnumerable<Room> GetAll()
         {
-            return this._roomRepository.All();
+            return this._roomRepository.All().Include( r => r.Users) ;
         }
 
         public Room Get(long id)
         {
-           return this._roomRepository.FirstOrDefault(r => r.Id == id);
+            return this._roomRepository.All().Include(r => r.Users).FirstOrDefault(r => r.Id == id);
         }
 
         public Room Create(Room entity)

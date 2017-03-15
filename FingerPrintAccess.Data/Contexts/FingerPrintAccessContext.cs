@@ -11,18 +11,17 @@ namespace FingerPrintAccess.Data.Contexts
 {
     public class FingerPrintAccessContext : DbContext
     {
-        static FingerPrintAccessContext()
-        {
-             Database.SetInitializer<FingerPrintAccessContext>(new DropCreateDatabaseIfModelChanges<FingerPrintAccessContext>());
-        }
         public FingerPrintAccessContext() 
             : base("FingerPrintAccess")
         {
+            Database.SetInitializer<FingerPrintAccessContext>(new CreateDatabaseIfNotExists<FingerPrintAccessContext>());
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Fingerprint> Fingerprints{ get; set; }
+        public DbSet<Log> Logs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserConfiguration());

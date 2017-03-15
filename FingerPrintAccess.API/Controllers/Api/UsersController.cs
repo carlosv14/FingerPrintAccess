@@ -25,11 +25,13 @@ namespace FingerPrintAccess.API.Controllers.Api
     {
         private readonly IUserService _userService;
         private readonly IRoomService _roomService;
+        private readonly IFingerprintService _fingerprintService;
 
-        public UsersController(IUserService userService, IRoomService roomService)
+        public UsersController(IUserService userService, IRoomService roomService, IFingerprintService fingerprintService)
         {
             this._userService = userService;
             this._roomService = roomService;
+            this._fingerprintService = fingerprintService;
         }
 
         [HttpGet]
@@ -66,6 +68,8 @@ namespace FingerPrintAccess.API.Controllers.Api
         }
 
         [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("api/Users")]
         // POST api/<controller>
         public async Task<IHttpActionResult> Post(UserFormViewModel user)
         {
@@ -211,6 +215,26 @@ namespace FingerPrintAccess.API.Controllers.Api
                 }
             }
             return this.Ok();
+        }
+
+        [HttpPost]
+        [Route("api/Users/AddFingerprint")]
+        public async Task<IHttpActionResult> AddFingerprint(long userId, long fingerprintId)
+        {
+            try
+            {
+                this._userService.AddFingerprint(userId, fingerprintId);
+                await this._userService.SaveChangesAsync();
+            }
+            catch (DataException)
+            {
+                if (!this._fingerprintService.FingerprintExists(fingerprintId))
+                {
+                    return this.NotFound();
+                }
+                throw;
+            }
+            return this.Ok(true);
         }
     }
 }

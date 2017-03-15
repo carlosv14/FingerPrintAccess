@@ -25,6 +25,7 @@ namespace FingerPrintAccess.Data.Repositories
             oldEntity.Id = newEntity.Id;
             oldEntity.Name = newEntity.Name;
             oldEntity.Users = newEntity.Users;
+            oldEntity.Fingerprints = newEntity.Fingerprints;
             return oldEntity;
         }
     }

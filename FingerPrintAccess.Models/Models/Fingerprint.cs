@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace FingerPrintAccess.Models.Models
 {
-    public class Role
+    public class Fingerprint
     {
-        public Role()
-        {
-            this.Users = new HashSet<User>();
-        }
         public long Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<User> Users { get; set; } 
+        public int FingerprintId { get; set; }
+        public User User { get; set; }
+        public Room Room { get; set; }
     }
 }

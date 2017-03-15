@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,12 +21,12 @@ namespace FingerPrintAccess.Service
 
         public IEnumerable<User> GetAll()
         {
-            return this._userRepository.All().Include(u => u.Rooms);
+            return this._userRepository.All().Include(u => u.Rooms).Include(u => u.Fingerprints);
         }
 
         public User Get(long id)
         {
-            return this._userRepository.All().Include(u => u.Rooms).FirstOrDefault(u => u.Id == id);
+            return this._userRepository.All().Include(u => u.Rooms).Include(u => u.Fingerprints).FirstOrDefault(u => u.Id == id);
         }
 
         public User Create(User entity)
@@ -60,7 +61,7 @@ namespace FingerPrintAccess.Service
 
         public User Get(string user, string password)
         {
-            return this._userRepository.All().Include(u => u.Roles).FirstOrDefault(u => u.Username == user && u.Password == password);
+            return this._userRepository.All().Include(u => u.Roles).Include(u => u.Fingerprints).FirstOrDefault(u => u.Username == user && u.Password == password);
         }
 
         public void AddRoom(long userId, long roomId)
@@ -73,6 +74,19 @@ namespace FingerPrintAccess.Service
             {
                 user.Rooms.Add(room);   
             }
+        }
+
+        public void AddFingerprint(long userId, long fingerprintId)
+        {
+            var user = this.Get(userId);
+
+            var fingerprint = new Fingerprint { Id = fingerprintId };
+            this._userRepository.Context.Fingerprints.Attach(fingerprint);
+            if (user != null)
+            {
+                user.Fingerprints.Add(fingerprint);
+            }
+            this._userRepository.Update(new User { Id = userId },user);
         }
     }
 }

@@ -72,9 +72,13 @@ namespace FingerPrintAccess.API.App_Start
         {
             kernel.Bind<AbstractBaseRepository<User>>().To<UserRepository>().InRequestScope();
             kernel.Bind<AbstractBaseRepository<Room>>().To<RoomRepository>().InRequestScope();
+            kernel.Bind<AbstractBaseRepository<Fingerprint>>().To<FingerprintRepository>().InRequestScope();
+            kernel.Bind<AbstractBaseRepository<Log>>().To<LogRepository>().InRequestScope();
 
             kernel.Bind<IUserService>().To<UserService>().InRequestScope();
             kernel.Bind<IRoomService>().To<RoomService>().InRequestScope();
+            kernel.Bind<IFingerprintService>().To<FingerprintService>().InRequestScope();
+            kernel.Bind<ILogService>().To<LogService>().InRequestScope();
         }        
     }
 }

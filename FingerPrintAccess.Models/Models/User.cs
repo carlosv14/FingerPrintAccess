@@ -15,11 +15,13 @@ namespace FingerPrintAccess.Models.Models
         public DateTime CreationDate { get; set; }
         public ICollection<Role> Roles { get; set; } 
         public ICollection<Room> Rooms { get; set; }
+        public ICollection<Fingerprint> Fingerprints { get; set; }
 
         public User()
         {
             this.Roles = new HashSet<Role>();
             this.Rooms = new HashSet<Room>();
+            this.Fingerprints = new HashSet<Fingerprint>();
             CreationDate = DateTime.Now;
         }
     }

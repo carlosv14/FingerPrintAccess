@@ -30,14 +30,15 @@ namespace FingerPrintAccess.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.Users.AddOrUpdate(new User
+            /*context.Users.AddOrUpdate(new User
             {
                 Name = "admin",
                 Password = "admin",
                 Username = "admin",
                 Roles = new List<Role>() {new Role {Name = "Admin"} },
-                Rooms = new List<Room>() {new Room {Name = "Principal room"} }
-            });
+                Rooms = new List<Room>() {new Room {Name = "Caja fuerte 1"} },
+                Fingerprints = new List<Fingerprint>() { new Fingerprint {FingerprintId = 0} }
+            });*/
 
         }
     }

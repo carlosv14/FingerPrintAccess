@@ -20,6 +20,8 @@ namespace FingerPrintAccess.Data.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Fingerprint> Fingerprints{ get; set; }
+        public DbSet<Log> Logs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserConfiguration());

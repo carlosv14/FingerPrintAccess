@@ -16,6 +16,8 @@ namespace FingerPrintAccess.Data.Configuration
             Property(u => u.Username).IsRequired().HasMaxLength(15);
             Property(u => u.Password).IsRequired().HasMaxLength(15);
             Property(u => u.Name).IsRequired().HasMaxLength(50);
+            HasMany(u => u.Fingerprints)
+                .WithOptional(f => f.User);
         }
     }
 }
